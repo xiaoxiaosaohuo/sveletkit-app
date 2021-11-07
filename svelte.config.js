@@ -1,29 +1,27 @@
 import preprocess from 'svelte-preprocess';
-import { resolve, dirname } from 'path';
-import { fileURLToPath } from 'url';
-// import tailwindcss from 'tailwindcss';
-// import pxtorem from 'postcss-pxtorem';
-// import autoprefixer from 'autoprefixer';
-const dirName = dirname(fileURLToPath(import.meta.url));
-/** @type {import('@sveltejs/kit').Config} */
+import path from 'path';
+import node from '@sveltejs/adapter-node';
+
 const config = {
 	// Consult https://github.com/sveltejs/svelte-preprocess
 	// for more information about preprocessors
 	preprocess: preprocess(),
 
 	kit: {
+		adapter: node({
+			out: 'build'
+		}),
+		hostHeader: 'X-Forwarded-Host',
+		floc: true,
 		// hydrate the <div id="svelte"> element in src/app.html
 		target: '#svelte',
 		vite: {
-			// optimizeDeps: {
-			// 	include: ['@smartnews/isomorphic-uhtml']
-			// },
 			resolve: {
 				alias: {
-					$components: resolve(dirName, './src/components'),
-					$utils: resolve(dirName, './src/utils'),
-					$static: resolve(dirName, './static'),
-					$types: resolve(dirName, './src/types')
+					$components: path.resolve('./src/components/'),
+					$store: path.resolve('./src/store/index.ts'),
+					$api: path.resolve('./src/routes/api/'),
+					$models: path.resolve('./src/models/')
 				}
 			}
 		}
