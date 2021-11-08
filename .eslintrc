@@ -1,0 +1,30 @@
+{
+    "rules": {
+        "indent": [ "error", 4, { "SwitchCase": 1 } ],
+        "quotes": [ "error", "single" ],
+        "linebreak-style": [ "error", "unix" ],
+        "semi": [ "error", "always" ],
+        "keyword-spacing": [ "error", { "before": true, "after": true } ],
+        "space-before-blocks": [ "error", "always" ]
+    },
+    "env": {
+        "es6": true,
+        "browser": true,
+        "mocha": true,
+        "node": true
+    },
+    "plugins": [
+        "svelte3"
+    ],
+    "extends": "eslint:recommended",
+    "overrides": [
+        {
+            "files": ["**/*.svelte"],
+            "processor": "svelte3/svelte3"
+        }
+    ],
+    "parserOptions": {
+        "ecmaVersion": 9,
+        "sourceType": "module"
+    }
+}
